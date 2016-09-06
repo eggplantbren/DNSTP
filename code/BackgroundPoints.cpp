@@ -18,5 +18,12 @@ double BackgroundPoints::approximate_log_X
     return 0.0;
 }
 
+void BackgroundPoints::add_point
+                    (unsigned int _stage, const std::vector<double>& point)
+{
+    stage.push_back(_stage);
+    points.push_back(point);
+}
+
 } // namespace DNSTP
 

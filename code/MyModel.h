@@ -2,6 +2,7 @@
 #define DNSTP_MyModel
 
 #include "DNest4/code/DNest4.h"
+#include "BackgroundPoints.h"
 #include <ostream>
 
 namespace DNSTP
@@ -16,6 +17,9 @@ class MyModel
     private:
         // Dimensionality of the example
         static constexpr size_t num_dimensions = 100;
+
+        // Background points
+        static BackgroundPoints background;
 
         // The parameters
         std::vector<double> params;
