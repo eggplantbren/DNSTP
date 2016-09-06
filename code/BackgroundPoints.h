@@ -14,7 +14,6 @@ namespace DNSTP
 class BackgroundPoints
 {
     private:
-        
         std::vector<std::vector<double>> points;
         std::vector<size_t> stage;
 
@@ -25,7 +24,6 @@ class BackgroundPoints
         // Evaluate the approximation to log[X(l1, l2)]
         double approximate_log_X
                         (const std::vector<double>& objective_functions) const;
-
 };
 
 } // namespace DNSTP
