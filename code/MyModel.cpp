@@ -58,6 +58,11 @@ double MyModel::log_likelihood() const
 void MyModel::print(std::ostream& out) const
 {
     out<<std::setprecision(10);
+
+    auto L = objective_functions();
+    for(double LL: L)
+        out<<LL<<' ';
+
     for(double x: params)
         out<<x<<' ';
 }
@@ -65,6 +70,10 @@ void MyModel::print(std::ostream& out) const
 std::string MyModel::description() const
 {
     std::stringstream s;
+
+    for(size_t i=0; i<num_objective_functions; ++i)
+        s<<"L["<<i<<"], ";
+
     for(size_t i=0; i<num_dimensions; ++i)
     {
         s<<"params["<<i<<']';
