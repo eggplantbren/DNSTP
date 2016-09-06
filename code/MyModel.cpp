@@ -1,23 +1,20 @@
 #include "MyModel.h"
 #include "DNest4/code/DNest4.h"
 
-using namespace std;
-using namespace DNest4;
+namespace DNSTP
+{
 
 MyModel::MyModel()
 {
-
 }
 
-void MyModel::from_prior(RNG& rng)
+void MyModel::from_prior(DNest4::RNG& rng)
 {
-
 }
 
-double MyModel::perturb(RNG& rng)
+double MyModel::perturb(DNest4::RNG& rng)
 {
-	double logH = 0.;
-
+	double logH = 0.0;
 	return logH;
 }
 
@@ -32,8 +29,10 @@ void MyModel::print(std::ostream& out) const
 
 }
 
-string MyModel::description() const
+std::string MyModel::description() const
 {
-	return string("");
+	return std::string("");
 }
+
+} // namespace DNSTP
 

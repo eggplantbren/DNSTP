@@ -1,8 +1,11 @@
-#ifndef DNest4_Template_MyModel
-#define DNest4_Template_MyModel
+#ifndef DNSTP_MyModel
+#define DNSTP_MyModel
 
 #include "DNest4/code/DNest4.h"
 #include <ostream>
+
+namespace DNSTP
+{
 
 class MyModel
 {
@@ -28,6 +31,8 @@ class MyModel
 		// Return string with column information
 		std::string description() const;
 };
+
+} // namespace DNSTP
 
 #endif
 
