@@ -36,6 +36,19 @@ double MyModel::perturb(DNest4::RNG& rng)
 	return logH;
 }
 
+std::vector<double> MyModel::objective_functions() const
+{
+    std::vector<double> result(num_objective_functions, 0.0);
+
+	for(double x: params)
+	{
+		result[0] += -pow(x - 0.5, 2);
+		result[1] += -pow(sin(4*M_PI*x), 2);
+	}
+
+    return result;
+}
+
 double MyModel::log_likelihood() const
 {
 	double logL = 0.;
