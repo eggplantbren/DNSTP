@@ -14,7 +14,11 @@ class MyModel
         static constexpr size_t num_objective_functions = 2;
 
     private:
+        // Dimensionality of the example
+        static constexpr size_t num_dimensions = 100;
 
+        // The parameters
+        std::vector<double> params;
 
     public:
         // Constructor only gives size of params
