@@ -9,27 +9,35 @@ namespace DNSTP
 
 class MyModel
 {
-	private:
+    public:
+        // How many objective functions are there in this problem?
+        static constexpr size_t num_objective_functions = 2;
+
+    private:
 
 
-	public:
-		// Constructor only gives size of params
-		MyModel();
+    public:
+        // Constructor only gives size of params
+        MyModel();
 
-		// Generate the point from the prior
-		void from_prior(DNest4::RNG& rng);
+        // Generate the point from the prior
+        void from_prior(DNest4::RNG& rng);
 
-		// Metropolis-Hastings proposals
-		double perturb(DNest4::RNG& rng);
+        // Metropolis-Hastings proposals
+        double perturb(DNest4::RNG& rng);
 
-		// Likelihood function
-		double log_likelihood() const;
+        // Return the two objective functions
+        std::vector<double> objective_functions() const;
 
-		// Print to stream
-		void print(std::ostream& out) const;
+        // "Likelihood function" that DNest4 uses
+        // We want this to be proportional to -Phi[X(l1, l2)]
+        double log_likelihood() const;
 
-		// Return string with column information
-		std::string description() const;
+        // Print to stream
+        void print(std::ostream& out) const;
+
+        // Return string with column information
+        std::string description() const;
 };
 
 } // namespace DNSTP
