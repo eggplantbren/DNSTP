@@ -18,9 +18,6 @@ class MyModel
         // Dimensionality of the example
         static constexpr size_t num_dimensions = 100;
 
-        // Background points
-        static BackgroundPoints background;
-
         // The parameters
         std::vector<double> params;
 

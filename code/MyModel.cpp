@@ -6,9 +6,6 @@
 namespace DNSTP
 {
 
-// Initialise static variables
-BackgroundPoints MyModel::background;
-
 MyModel::MyModel()
 :params(num_dimensions)
 {
@@ -22,20 +19,6 @@ void MyModel::from_prior(DNest4::RNG& rng)
 
 double MyModel::perturb(DNest4::RNG& rng)
 {
-    // First, stash some points
-    {
-        // Lock mutex here (when going parallel)
-
-        static unsigned long long count = 0;
-        static unsigned int stage = 0;
-        if(count % 100 == 0)
-        {
-            background.add_point(stage, objective_functions());
-        }
-        ++count;
-    }
-
-    // Now, the actual proposal
 	double logH = 0.0;
 
     int reps = 1;

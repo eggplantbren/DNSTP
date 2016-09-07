@@ -10,7 +10,11 @@ template<class ModelType>
 class Sampler: public DNest4::Sampler<ModelType>
 {
     private:
+        // A DNest4 sampler
         DNest4::Sampler<ModelType> dnest4_sampler;
+
+        // Background points
+        BackgroundPoints background;
 
     public:
         // Constructor. You must create the DNest4 sampler
