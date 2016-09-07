@@ -1,34 +1,30 @@
 #ifndef DNSTP_Sampler
 #define DNSTP_Sampler
 
-#include "DNest4/code/Sampler.h"
+#include <vector>
 
 namespace DNSTP
 {
 
 /*
-* A derived class of DNest4::Sampler, allowing us to override
-* the do_bookkeeping() function.
+* An instance of this class is a DNSTP sampler.
+* Not parallel for now - just want to get a working algorithm.
 */
 
 template<class ModelType>
-class Sampler: public DNest4::Sampler<ModelType>
+class Sampler
 {
     private:
+        // The particles
+        std::vector<ModelType> particles;
+
         // Background points
         BackgroundPoints background;
 
     public:
-        // These constructors call their DNest4::Sampler
-        // counterparts.
-        Sampler();
-        Sampler(unsigned int num_threads, double compression,
-                           const DNest4::Options& options);
-        Sampler(unsigned int num_threads, double compression,
-                           const DNest4::Options& options, bool save_to_disk);
+        // Constructor. Pass in the number of particles
+        Sampler(size_t num_particles);
 
-        // Override do_bookkeeping()
-        void do_bookkeeping();
 };
 
 } // namespace DNSTP
