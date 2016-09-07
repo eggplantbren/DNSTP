@@ -33,28 +33,31 @@ void Sampler<ModelType>::do_bookkeeping()
     bool created_level = false;
 
     // Create a new level?
-    if(!enough_levels(levels) &&
-        (all_above.size() >= options.new_level_interval))
+    if(!this->enough_levels(this->levels) &&
+        (this->all_above.size() >= this->options.new_level_interval))
     {
         // Create the level
-        std::sort(all_above.begin(), all_above.end());
-        int index = static_cast<int>((1. - 1./compression)*all_above.size());
-        std::cout<<"# Creating level "<<levels.size()<<" with log likelihood = ";
+        std::sort(this->all_above.begin(), this->all_above.end());
+        int index = static_cast<int>
+                        ((1. - 1./this->compression)*this->all_above.size());
+        std::cout<<"# Creating level "<<this->levels.size()
+                                <<" with log likelihood = ";
         std::cout<<std::setprecision(12);
-        std::cout<<all_above[index].get_value()<<"."<<std::endl;
+        std::cout<<this->all_above[index].get_value()<<"."<<std::endl;
 
-        levels.push_back(Level(all_above[index]));
-        all_above.erase(all_above.begin(), all_above.begin() + index + 1);
-        for(auto& a:above)
+        this->levels.push_back(DNest4::Level(this->all_above[index]));
+        this->all_above.erase(this->all_above.begin(),
+                    this->all_above.begin() + index + 1);
+        for(auto& a:this->above)
             a.clear();
 
         // If last level
-        if(enough_levels(levels))
+        if(this->enough_levels(this->levels))
         {
-            DNest4::Level::renormalise_visits(levels,
-                static_cast<int>(0.1*options.new_level_interval));
-            all_above.clear();
-            options.max_num_levels = levels.size();
+            DNest4::Level::renormalise_visits(this->levels,
+                static_cast<int>(0.1*this->options.new_level_interval));
+            this->all_above.clear();
+            this->options.max_num_levels = this->levels.size();
             std::cout<<"# Done creating levels."<<std::endl;
         }
         else
@@ -67,14 +70,14 @@ void Sampler<ModelType>::do_bookkeeping()
     }
 
     // Recalculate log_X values of levels
-    DNest4::Level::recalculate_log_X(levels, compression,
-                                                options.new_level_interval);
+    DNest4::Level::recalculate_log_X(this->levels, this->compression,
+                                     this->options.new_level_interval);
 
     // Save levels if one was created
     if(created_level)
         this->save_levels();
 
-    if(count_mcmc_steps_since_save >= options.save_interval)
+    if(this->count_mcmc_steps_since_save >= this->options.save_interval)
     {
         this->save_particle();
 

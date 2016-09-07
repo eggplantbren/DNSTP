@@ -18,14 +18,6 @@ class Sampler: public DNest4::Sampler<ModelType>
         // Background points
         BackgroundPoints background;
 
-        // Allow access to some superclass members
-        using DNest4::Sampler<ModelType>::levels;
-        using DNest4::Sampler<ModelType>::all_above;
-        using DNest4::Sampler<ModelType>::options;
-        using DNest4::Sampler<ModelType>::compression;
-        using DNest4::Sampler<ModelType>::above;
-        using DNest4::Sampler<ModelType>::count_mcmc_steps_since_save;
-
     public:
         // These constructors call their DNest4::Sampler
         // counterparts.
