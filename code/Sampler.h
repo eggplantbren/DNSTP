@@ -10,17 +10,17 @@ template<class ModelType>
 class Sampler: public DNest4::Sampler<ModelType>
 {
     private:
-        // A DNest4 sampler
-        DNest4::Sampler<ModelType> dnest4_sampler;
-
         // Background points
         BackgroundPoints background;
 
     public:
-        // Constructor. You must create the DNest4 sampler
-        // and pass it in.
-        Sampler(DNest4::Sampler<ModelType>&& sampler);
-
+        // These constructors call their DNest4::Sampler
+        // counterparts.
+        Sampler();
+        Sampler(unsigned int num_threads, double compression,
+                           const DNest4::Options& options);
+        Sampler(unsigned int num_threads, double compression,
+                           const DNest4::Options& options, bool save_to_disk);
 };
 
 } // namespace DNSTP

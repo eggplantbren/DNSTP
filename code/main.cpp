@@ -6,8 +6,7 @@
 int main(int argc, char** argv)
 {
     // Create the DNSTP sampler
-    DNSTP::Sampler<DNSTP::MyModel> sampler
-                    (DNest4::setup<DNSTP::MyModel>(argc, argv));
+    DNSTP::Sampler<DNSTP::MyModel> sampler;
 
 	return 0;
 }
