@@ -29,6 +29,12 @@ class Sampler
         // Constructor. Pass in the number of particles
         // and an RNG seed (defaults to zero).
         Sampler(size_t num_particles, unsigned int rng_seed=0);
+
+        // Generate all the particles from the prior.
+        void initialise();
+
+        // Do some MCMC steps
+        void do_mcmc_steps(unsigned int num_steps);
 };
 
 } // namespace DNSTP
