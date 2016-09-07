@@ -8,6 +8,8 @@ int main(int argc, char** argv)
     // Create the DNSTP sampler
     DNSTP::Sampler<DNSTP::MyModel> sampler;
 
+    sampler.run();
+
 	return 0;
 }
 
