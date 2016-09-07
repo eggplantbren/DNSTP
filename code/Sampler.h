@@ -2,6 +2,7 @@
 #define DNSTP_Sampler
 
 #include <vector>
+#include "DNest4/code/RNG.h"
 
 namespace DNSTP
 {
@@ -21,10 +22,13 @@ class Sampler
         // Background points
         BackgroundPoints background;
 
+        // Random number generator to use
+        DNest4::RNG rng;
+
     public:
         // Constructor. Pass in the number of particles
-        Sampler(size_t num_particles);
-
+        // and an RNG seed (defaults to zero).
+        Sampler(size_t num_particles, unsigned int rng_seed=0);
 };
 
 } // namespace DNSTP
