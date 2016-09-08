@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdexcept>
 
 namespace DNSTP
 {
@@ -9,7 +10,8 @@ Sampler<ModelType>::Sampler(size_t num_particles, unsigned int rng_seed)
 :particles(num_particles)
 ,rng(rng_seed)
 {
-
+    if(num_particles == 0)
+        throw std::domain_error("Can't create sampler with 0 particles.");
 }
 
 // Generate all particles from the prior.
