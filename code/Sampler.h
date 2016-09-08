@@ -19,6 +19,9 @@ class Sampler
         // The particles
         std::vector<ModelType> particles;
 
+        // Corner counts of the particles
+        std::vector<size_t> corner_counts;
+
         // Background points
         BackgroundPoints background;
 

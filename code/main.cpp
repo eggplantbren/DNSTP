@@ -13,7 +13,8 @@ int main()
     sampler.initialise();
 
     // Do some MCMC steps.
-    sampler.do_mcmc_steps(1000);
+    for(int i=0; i<100; ++i)
+        sampler.do_mcmc_steps(1000);
 
     return 0;
 }
