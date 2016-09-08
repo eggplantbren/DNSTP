@@ -54,7 +54,7 @@ void Sampler<ModelType>::do_mcmc_steps(unsigned int num_steps)
 
     // Put objective function values into the background
     for(size_t i=0; i<keep.size(); ++i)
-        background.add_point(0, keep[i]);
+        background.add_point(keep[i]);
 
     // Print objective function values to the screen, then exit.
     std::cout<<std::setprecision(12);
