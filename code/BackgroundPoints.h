@@ -2,6 +2,7 @@
 #define DNSTP_BackgroundPoints
 
 #include <vector>
+#include <stdlib.h>
 
 namespace DNSTP
 {
@@ -13,16 +14,18 @@ namespace DNSTP
 class BackgroundPoints
 {
     private:
-        std::vector<std::vector<double>> points;
-        std::vector<unsigned int> stage;
+        // 3D array. First dimension indexes 'stage',
+        // then for each stage there is a set of points.
+        std::vector<std::vector<std::vector<double>>> points;
 
     public:
         // Initialises everything empty
         BackgroundPoints();
 
-        // Evaluate the approximation to log[X(l1, l2)]
-        double approximate_log_X
-                        (const std::vector<double>& objective_functions) const;
+        // Evaluate something we can use (eventually)
+        // to create an approximation to log[X(l1, l2)]
+        size_t corner_count(unsigned int which_stage,
+                        const std::vector<double>& objective_functions) const;
 
         // Add a point
         void add_point(unsigned int stage, const std::vector<double>& point);

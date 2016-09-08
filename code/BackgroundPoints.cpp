@@ -1,28 +1,40 @@
 #include "BackgroundPoints.h"
+#include "DNSTP.h"
+#include <stdexcept>
 
 namespace DNSTP
 {
 
 BackgroundPoints::BackgroundPoints()
 {
+
 }
 
-double BackgroundPoints::approximate_log_X
-                    (const std::vector<double>& objective_functions) const
+size_t BackgroundPoints::corner_count(unsigned int which_stage,
+                        const std::vector<double>& objective_functions) const
 {
-    if(points.size() == 0)
+    if(which_stage >= points.size())
+        throw std::domain_error("which_stage too high.");
+
+    size_t count = 0;
+
+    for(size_t i=0; i<points[which_stage].size(); ++i)
     {
-        return 0.0;
+        if(is_above(points[which_stage][i], objective_functions))
+            ++count;
     }
 
-    return 0.0;
+    return count;
 }
 
 void BackgroundPoints::add_point
-                    (unsigned int _stage, const std::vector<double>& point)
+                    (unsigned int which_stage, const std::vector<double>& point)
 {
-    stage.push_back(_stage);
-    points.push_back(point);
+    if(which_stage > points.size())
+        throw std::domain_error("which_stage too high.");
+    else if(which_stage == points.size())
+        points.push_back(std::vector<std::vector<double>>());        
+    points[which_stage].push_back(point);
 }
 
 } // namespace DNSTP
