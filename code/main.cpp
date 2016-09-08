@@ -4,7 +4,7 @@
 #include "MyModel.h"
 #include "Sampler.h"
 
-int main(int argc, char** argv)
+int main()
 {
     // Create sampler
     DNSTP::Sampler<DNSTP::MyModel> sampler(1, time(0));
