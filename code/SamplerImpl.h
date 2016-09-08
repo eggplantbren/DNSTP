@@ -24,6 +24,13 @@ void Sampler<ModelType>::initialise()
 template<class ModelType>
 void Sampler<ModelType>::do_mcmc_steps(unsigned int num_steps)
 {
+    static constexpr unsigned int thin = 10;
+
+    // Vector of vectors to store objective function values
+    // observed as we do the exploration.
+    std::vector<std::vector<double>> keep(num_steps/thin,
+                std::vector<double>(ModelType::num_objective_functions));
+
     double logH;
     int which;
 
@@ -32,13 +39,30 @@ void Sampler<ModelType>::do_mcmc_steps(unsigned int num_steps)
         which = rng.rand_int(particles.size());
 
         ModelType proposal = particles[which];
-        logH = proposal.perturb();
+        logH = proposal.perturb(rng);
 
         if(rng.rand() <= exp(logH))
         {
             particles[which] = proposal;
         }
+
+        if(i%thin == 0)
+            keep[i/thin] = particles[which].objective_functions();
     }
+
+    // Put objective function values into the background
+    for(size_t i=0; i<keep.size(); ++i)
+        background.add_point(1, keep[i]);
+
+    // Print objective function values to the screen, then exit.
+    std::cout<<std::setprecision(12);
+    for(size_t i=0; i<keep.size(); ++i)
+    {
+        for(size_t j=0; j<keep[i].size(); ++j)
+            std::cout<<keep[i][j]<<' ';
+        std::cout<<std::endl;
+    }
+    exit(0);
 }
 
 } // namespace DNSTP
